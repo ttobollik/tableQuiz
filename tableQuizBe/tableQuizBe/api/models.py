@@ -1,16 +1,21 @@
 from django.db import models
 
+class QuizUser(models.Model):
+    username = models.CharField(max_length=32)
+    email = models.CharField(max_length=32)
+    picture = models.CharField(max_length=32)
+    password = models.CharField(max_length=32)
+
 
 class Question(models.Model):
-    question_text = models.CharField(max_length=200)
-    question_author = models.CharField(max_length=30)
-    question_category = models.CharField(max_length=30)
+    userId = models.CharField(max_length=32)
+    questionText = models.CharField(max_length=256)
+    picture = models.CharField(max_length=32)
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True)
-    answer_text = models.CharField(max_length=200)
-    answer_correct = models.BooleanField(default=0)
-    answer_fifty_fifty = models.BooleanField(default=0)
-    answer_comment = models.CharField(max_length=400)
-    answer_picture = models.CharField(max_length=200)
+    questionId = models.CharField(max_length=256)
+    answerText = models.CharField(max_length=255)
+    answerTrue = models.BooleanField(default=False)
+    answerFiftyFifty = models.BooleanField(default=False)
+    picture = models.CharField(max_length=32)
